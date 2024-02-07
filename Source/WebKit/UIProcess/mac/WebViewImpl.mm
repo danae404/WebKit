@@ -6013,6 +6013,11 @@ void WebViewImpl::togglePictureInPicture()
     [m_playbackControlsManager togglePictureInPicture];
 }
 
+void WebViewImpl::toggleInWindow()
+{
+    [m_playbackControlsManager toggleInWindow];
+}
+
 void WebViewImpl::updateMediaPlaybackControlsManager()
 {
     if (!m_page->hasActiveVideoForControlsManager())
