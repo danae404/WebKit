@@ -77,6 +77,9 @@ class MacOSFullscreenMediaControls extends MediaControls
 
         this.bottomControlsBar.element.addEventListener("mousedown", this);
         this.bottomControlsBar.element.addEventListener("click", this);
+        this.element.addEventListener("mousemove", function() {
+            this.faded = false;
+        }.bind(this));
 
         this._backgroundClickDelegateNotifier = new BackgroundClickDelegateNotifier(this);
     }
