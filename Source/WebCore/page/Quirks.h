@@ -240,6 +240,9 @@ public:
     WEBCORE_EXPORT bool shouldSynthesizeTouchEventsAfterNonSyntheticClick(const Element&) const;
     WEBCORE_EXPORT bool needsPointerTouchCompatibility(const Element&) const;
     bool shouldTreatAddingMouseOutEventListenerAsContentChange() const;
+#if ENABLE(FULLSCREEN_API)
+    bool shouldInjectCSSInFullscreenForPremierLeague() const;
+#endif
 #endif
 
     bool needsMozillaFileTypeForDataTransfer() const;

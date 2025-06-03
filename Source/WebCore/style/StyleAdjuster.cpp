@@ -1044,6 +1044,35 @@ void Adjuster::adjustForSiteSpecificQuirks(RenderStyle& style) const
         if (is<HTMLVideoElement>(*m_element) && isFullscreen && m_element->hasClassName(playerClassName) && style.objectFit() == ObjectFit::Fill)
             style.setObjectFit(ObjectFit::Contain);
     }
+
+#if PLATFORM(IOS_FAMILY)
+    if (m_document->quirks().shouldInjectCSSInFullscreenForPremierLeague()) {
+        if (m_element->hasAttribute("data-fullscreen"_s)) {
+            if (m_document->fullscreenIfExists()->isFullscreen()) {
+                style.setMaxWidth(WebCore::Length(100, LengthType::Percent));
+                style.setMaxHeight(WebCore::Length(100, LengthType::Percent));
+                style.setWidth(WebCore::Length(100, LengthType::Percent));
+                style.setHeight(WebCore::Length(100, LengthType::Percent));
+                style.setBackgroundColor({ WebCore::Color::black });
+
+                style.setMarginTop(WebCore::Length(0, LengthType::Auto));
+                style.setMarginBottom(WebCore::Length(0, LengthType::Auto));
+                style.setMarginLeft(WebCore::Length(0, LengthType::Auto));
+                style.setMarginRight(WebCore::Length(0, LengthType::Auto));
+
+                style.setPaddingTop(WebCore::Length(0, LengthType::Auto));
+                style.setPaddingBottom(WebCore::Length(0, LengthType::Auto));
+                style.setPaddingLeft(WebCore::Length(0, LengthType::Auto));
+                style.setPaddingRight(WebCore::Length(0, LengthType::Auto));
+
+                style.setPosition(PositionType::Fixed);
+                style.setTop(WebCore::Length(0, LengthType::Auto));
+                style.setLeft(WebCore::Length(0, LengthType::Auto));
+            } else
+                m_element->invalidateStyle();
+        }
+    }
+#endif
 #endif
 #endif
 

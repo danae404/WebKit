@@ -109,6 +109,9 @@ struct WEBCORE_EXPORT QuirksData {
     bool shouldSuppressAutocorrectionAndAutocapitalizationInHiddenEditableAreasQuirk : 1 { false };
     bool shouldSynthesizeTouchEventsAfterNonSyntheticClickQuirk : 1 { false };
     bool shouldTreatAddingMouseOutEventListenerAsContentChange : 1 { false };
+#if ENABLE(FULLSCREEN_API)
+    bool shouldInjectCSSInFullscreenForPremierLeague : 1 { false };
+#endif
 #endif // PLATFORM(IOS_FAMILY)
 
 #if PLATFORM(IOS) || PLATFORM(VISION)
