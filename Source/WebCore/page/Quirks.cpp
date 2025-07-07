@@ -1773,6 +1773,13 @@ bool Quirks::shouldReuseLiveRangeForSelectionUpdate() const
 }
 
 #if PLATFORM(IOS_FAMILY)
+#if ENABLE(FULLSCREEN_API)
+// premierleague.com rdar://138050196
+bool Quirks::shouldInjectCSSInFullscreenForPremierLeague() const
+{
+    return needsQuirks() && m_quirksData.shouldInjectCSSInFullscreenForPremierLeague;
+}
+#endif
 
 bool Quirks::needsPointerTouchCompatibility(const Element& target) const
 {
@@ -2648,6 +2655,11 @@ static void handlePremierLeagueQuirks(QuirksData& quirksData, const URL& quirksU
 
     // premierleague.com: rdar://136791737
     quirksData.shouldAvoidStartingSelectionOnMouseDownOverPointerCursor = true;
+
+#if PLATFORM(IOS_FAMILY) && ENABLE(FULLSCREEN_API)
+    // premierleague.com: rdar://138050196
+    quirksData.shouldInjectCSSInFullscreenForPremierLeague = true;
+#endif
 }
 
 static void handleSFUSDQuirks(QuirksData& quirksData, const URL& quirksURL, const String& quirksDomainString, const URL& documentURL)
