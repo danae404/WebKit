@@ -163,6 +163,9 @@ fast/images/text-recognition [ Pass ]
 fast/images/text-recognition/ios [ Pass ]
 fast/images/text-recognition/mac [ Skip ]
 
+# rdar://157036215
+imported/w3c/web-platform-tests/webvtt/rendering/cues-with-video/processing-model/line_1_wrapped_cue_grow_downwards.html [ ImageOnlyFailure ]
+
 # Accessibility text recognition support tests.
 accessibility/ios-simulator/image-overlay-elements.html [ Pass ]
 
