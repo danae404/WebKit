@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="reftest-wait">
-<title>WebVTT rendering, ::cue(*), css properties with value inherit should inherit from media element</title>
+<title>WebVTT rendering, ::cue, css properties with value inherit should inherit from media element</title>
 <link rel="match" href="inherit_values_from_media_element-ref.html">
 <style>
 video {
@@ -12,7 +12,7 @@ video {
     background: #0f0 url('../../media/background.gif') repeat-x top left;
     outline: solid #00f 2px;
 }
-::cue(*) {
+::cue {
     white-space: inherit;
     font: inherit;
     color: inherit;
