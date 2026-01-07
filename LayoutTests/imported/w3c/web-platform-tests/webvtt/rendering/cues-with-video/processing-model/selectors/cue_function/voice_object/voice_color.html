@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html class="reftest-wait">
 <title>WebVTT rendering, ::cue(v), color: #0000ff</title>
+<link rel="stylesheet" type="text/css" href="/fonts/ahem.css" />
 <link rel="match" href="voice_color-ref.html">
 <style>
 html { overflow:hidden }
 body { margin:0 }
+::cue {
+    font-family: ahem;
+}
 ::cue(v) {
-    font-family: sans-serif;
     color: #0000ff;
 }
 </style>

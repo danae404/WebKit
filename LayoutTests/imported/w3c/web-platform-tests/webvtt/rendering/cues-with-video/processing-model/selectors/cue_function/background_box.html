@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html class="reftest-wait">
 <title>WebVTT rendering, ::cue(* *) should match nothing (since the background box is anonymous)</title>
+<link rel="stylesheet" type="text/css" href="/fonts/ahem.css" />
 <link rel="match" href="background_box-ref.html">
 <style>
 html { overflow:hidden }
 body { margin:0 }
+::cue {
+    font-family: ahem;
+}
 ::cue(* *) {
     background:red;
     color:yellow

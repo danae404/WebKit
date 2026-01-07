@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html class="reftest-wait">
 <title>WebVTT rendering, bold object transition with timestamp, ::cue(b:past) selector</title>
+<link rel="stylesheet" type="text/css" href="/fonts/ahem.css" />
 <link rel="match" href="bold_timestamp_past-ref.html">
 <style>
 html { overflow:hidden }
 body { margin:0 }
+::cue {
+    font-family: ahem;
+}
 ::cue(b:past) {
     color: #00ff00;
 }

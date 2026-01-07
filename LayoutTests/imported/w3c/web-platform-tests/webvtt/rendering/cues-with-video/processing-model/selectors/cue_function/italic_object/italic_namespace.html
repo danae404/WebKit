@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html class="reftest-wait">
 <title>WebVTT rendering, ::cue(|i) should match</title>
+<link rel="stylesheet" type="text/css" href="/fonts/ahem.css" />
 <link rel="match" href="italic_namespace-ref.html">
 <style>
 html { overflow:hidden }
 body { margin:0 }
 ::cue {
     color: green;
+    font-family: ahem;
 }
 ::cue(*|i) {
     color: red

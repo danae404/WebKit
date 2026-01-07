@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html class="reftest-wait">
 <title>WebVTT rendering, ::cue(c), background properties</title>
+<link rel="stylesheet" type="text/css" href="/fonts/ahem.css" />
 <link rel="match" href="class_background_properties-ref.html">
 <style>
 html { overflow:hidden }
 body { margin:0 }
+::cue {
+    font-family: ahem;
+}
 ::cue(c) {
-    font-family: sans-serif;
     background-color: #0f0;
     background-image: url('../../../media/background.gif');
     background-repeat: repeat-x;

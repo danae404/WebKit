@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html class="reftest-wait">
 <title>WebVTT rendering, ::cue(|b) should match</title>
+<link rel="stylesheet" type="text/css" href="/fonts/ahem.css" />
 <link rel="match" href="bold_namespace-ref.html">
 <style>
 html { overflow:hidden }
 body { margin:0 }
 ::cue {
+    font-family: ahem;
     color: green;
 }
 ::cue(*|b) {

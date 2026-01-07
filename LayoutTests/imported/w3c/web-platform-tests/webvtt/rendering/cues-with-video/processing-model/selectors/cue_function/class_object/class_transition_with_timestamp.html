@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html class="reftest-wait">
 <title>WebVTT rendering, class object transition with timestamp, ::cue(c:past) selector</title>
+<link rel="stylesheet" type="text/css" href="/fonts/ahem.css" />
 <link rel="match" href="class_transition_with_timestamp-ref.html">
 <style>
 html { overflow:hidden }
 body { margin:0 }
+::cue {
+    font-family: Ahem;
+}
 ::cue(c) {
     -o-transition: color 9s steps(2, start);
     transition: color 9s steps(2, start);

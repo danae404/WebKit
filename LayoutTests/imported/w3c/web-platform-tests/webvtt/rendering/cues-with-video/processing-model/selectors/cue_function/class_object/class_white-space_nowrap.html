@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html class="reftest-wait">
 <title>WebVTT rendering, class object, ::cue(c), white-space: nowrap (cue does not wrap)</title>
+<link rel="stylesheet" type="text/css" href="/fonts/ahem.css" />
 <link rel="match" href="class_white-space_nowrap-ref.html">
 <style>
 html { overflow:hidden }
 body { margin:0 }
+::cue {
+    font-family: Ahem;
+}
 ::cue(c) {
     white-space: nowrap
 }
