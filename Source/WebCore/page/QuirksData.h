@@ -199,6 +199,7 @@ struct QuirksData {
         ShouldIgnoreViewportArgumentsToAvoidExcessiveZoomQuirk,
         ShouldIgnoreViewportArgumentsToAvoidEnlargedViewQuirk,
 #endif
+        ShouldInjectCSSInFullscreenForPremierLeague,
         ShouldLayOutAtMinimumWindowWidthWhenIgnoringScalingConstraintsQuirk,
 #if PLATFORM(IOS_FAMILY)
         ShouldNavigatorPluginsBeEmpty,

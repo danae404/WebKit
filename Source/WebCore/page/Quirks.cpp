@@ -612,6 +612,18 @@ bool Quirks::needsYouTubeOverflowScrollQuirk() const
 #endif
 }
 
+// premierleague.com rdar://138050196
+bool Quirks::shouldInjectCSSInFullscreenForPremierLeague() const
+{
+#if PLATFORM(IOS_FAMILY) && ENABLE(FULLSCREEN_API)
+    QUIRKS_EARLY_RETURN_IF_DISABLED_WITH_VALUE(false);
+
+    return m_quirksData.quirkIsEnabled(QuirksData::SiteSpecificQuirk::ShouldInjectCSSInFullscreenForPremierLeague);
+#else
+    return false;
+#endif
+}
+
 // amazon.com rdar://128962002
 bool Quirks::needsPrimeVideoUserSelectNoneQuirk() const
 {
@@ -3086,6 +3098,8 @@ static void handlePremierLeagueQuirks(QuirksData& quirksData, const URL& /* quir
         QuirksData::SiteSpecificQuirk::ShouldDispatchPlayPauseEventsOnResume,
         // premierleague.com: rdar://136791737
         QuirksData::SiteSpecificQuirk::ShouldAvoidStartingSelectionOnMouseDownOverPointerCursor,
+        // premierleague.com: rdar://138050196
+        QuirksData::SiteSpecificQuirk::ShouldInjectCSSInFullscreenForPremierLeague,
     });
 }
 

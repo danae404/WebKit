@@ -1176,6 +1176,30 @@ void Adjuster::adjustForSiteSpecificQuirks(RenderStyle& style) const
 
     if (documentQuirks.needsInstagramResizingReelsQuirk(*m_element, style, m_parentStyle))
         style.setFlexGrow(1);
+
+    if (documentQuirks.shouldInjectCSSInFullscreenForPremierLeague()) {
+        if (m_element->hasAttribute("data-fullscreen"_s) && m_document->fullscreenIfExists()->isFullscreen()) {
+            style.setMaxWidth(100_css_percentage);
+            style.setMaxHeight(100_css_percentage);
+            style.setWidth(100_css_percentage);
+            style.setHeight(100_css_percentage);
+            style.setBackgroundColor({ WebCore::Color::black });
+
+            style.setMarginTop(0_css_px);
+            style.setMarginBottom(0_css_px);
+            style.setMarginLeft(0_css_px);
+            style.setMarginRight(0_css_px);
+
+            style.setPaddingTop(0_css_px);
+            style.setPaddingBottom(0_css_px);
+            style.setPaddingLeft(0_css_px);
+            style.setPaddingRight(0_css_px);
+
+            style.setPosition(PositionType::Fixed);
+            style.setTop(0_css_px);
+            style.setLeft(0_css_px);
+        }
+    }
 }
 
 void Adjuster::propagateToDocumentElementAndInitialContainingBlock(Update& update, const Document& document)

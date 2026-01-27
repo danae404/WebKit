@@ -258,6 +258,8 @@ public:
 
     bool implicitMuteWhenVolumeSetToZero() const;
 
+    bool shouldInjectCSSInFullscreenForPremierLeague() const;
+
     bool needsZeroMaxTouchPointsQuirk() const;
     bool needsChromeMediaControlsPseudoElement() const;
 
