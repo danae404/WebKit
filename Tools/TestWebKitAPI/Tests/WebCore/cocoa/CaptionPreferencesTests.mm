@@ -709,5 +709,17 @@ TEST_F(CaptionPreferenceTests, ReceievedDidOpenWhenHighlighted)
 }
 #endif
 
+TEST_F(CaptionPreferenceTests, NullProfileNameShouldYieldEmptyStyleSheet)
+{
+    if (!canLoad_MediaAccessibility_MACaptionAppearanceIsCustomized())
+        return;
+
+    MediaAccessibilityShim shim;
+    UniqueRef group = PageGroup::create("CaptionPreferenceTests"_s);
+    auto preferences = CaptionUserPreferencesMediaAF::create(group);
+
+    SOFT_LINK_SHIM_SET_RESULT(MACaptionAppearanceCopyActiveProfileID, CFSTR(""));
+    EXPECT_STREQ(preferences->captionsStyleSheetOverride().utf8().data(), "");
+}
 
 }
