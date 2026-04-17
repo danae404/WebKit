@@ -6318,9 +6318,23 @@ bool WebViewImpl::hasFlagsChangedEventMonitor()
     return m_flagsChangedEventMonitor;
 }
 
+bool WebViewImpl::webViewIsTopmostAtEventLocation(NSEvent *event)
+{
+    RetainPtr view = m_view.get();
+    NSView *hitView = [[view window].contentView hitTest:[[view window].contentView convertPoint:event.locationInWindow fromView:nil]];
+    return [hitView isDescendantOf:view.get()];
+}
+
+bool WebViewImpl::shouldSupressMouseMoveEvent(NSEvent *event)
+{
+    if (m_ignoresMouseMoveEvents && !webViewIsTopmostAtEventLocation(event))
+        return true;
+    return false;
+}
+
 void WebViewImpl::mouseEntered(NSEvent *event)
 {
-    if (m_ignoresMouseMoveEvents)
+    if (shouldSupressMouseMoveEvent(event))
         return;
 
     if (event.trackingArea == m_flagsChangedEventMonitorTrackingArea.get()) {
@@ -6333,7 +6347,7 @@ void WebViewImpl::mouseEntered(NSEvent *event)
 
 void WebViewImpl::mouseExited(NSEvent *event)
 {
-    if (m_ignoresMouseMoveEvents)
+    if (shouldSupressMouseMoveEvent(event))
         return;
 
     if (event.trackingArea == m_flagsChangedEventMonitorTrackingArea.get()) {
@@ -6396,7 +6410,10 @@ void WebViewImpl::mouseDraggedInternal(NSEvent *event, WebMouseEventInputSource 
 
 void WebViewImpl::mouseMoved(NSEvent *event)
 {
-    if (m_ignoresNonWheelEvents || m_ignoresMouseMoveEvents)
+    if (m_ignoresNonWheelEvents)
+        return;
+
+    if (shouldSupressMouseMoveEvent(event))
         return;
 
     for (auto& hud : _pdfHUDViews.values())

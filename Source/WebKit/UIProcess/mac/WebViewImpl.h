@@ -530,6 +530,8 @@ public:
     bool ignoresNonWheelEvents() const { return m_ignoresNonWheelEvents; }
     void setIgnoresMouseMoveEvents(bool ignoresMouseMoveEvents) { m_ignoresMouseMoveEvents = ignoresMouseMoveEvents; }
     bool ignoresMouseMoveEvents() const { return m_ignoresMouseMoveEvents; }
+    bool webViewIsTopmostAtEventLocation(NSEvent *);
+    bool shouldSupressMouseMoveEvent(NSEvent *);
     void setIgnoresAllEvents(bool);
     bool ignoresAllEvents() const { return m_ignoresAllEvents; }
     void NODELETE setIgnoresMouseDraggedEvents(bool);

@@ -447,6 +447,28 @@ TEST(MouseEventTests, AutoscrollOnMouseDragBelowWindow)
     EXPECT_GT(scrollY, 0);
 }
 
+TEST(MouseEventTests, IgnoresMouseMoveEvents)
+{
+    RetainPtr webView = adoptNS([[TestWKWebView alloc] initWithFrame:NSMakeRect(0, 0, 400, 400)]);
+    [webView synchronouslyLoadTestPageNamed:@"mouse-move-listener"];
+    [webView _setIgnoresMouseMoveEvents:YES];
+
+    RetainPtr obscuringView = adoptNS([[NSView alloc] initWithFrame:NSMakeRect(200, 0, 200, 400)]);
+    [[webView superview] addSubview:obscuringView.get() positioned:NSWindowAbove relativeTo:webView.get()];
+
+    [webView mouseEnterAtPoint:NSMakePoint(100, 200)];
+    [webView mouseMoveToPoint:NSMakePoint(100, 200) withFlags:0];
+    [webView waitForNextPresentationUpdate];
+    EXPECT_TRUE([[webView objectByEvaluatingJavaScript:@"didMoveMouse()"] boolValue]);
+
+    [webView objectByEvaluatingJavaScript:@"mouseMoved = false"];
+
+    [webView mouseEnterAtPoint:NSMakePoint(300, 200)];
+    [webView mouseMoveToPoint:NSMakePoint(300, 200) withFlags:0];
+    [webView waitForNextPresentationUpdate];
+    EXPECT_FALSE([[webView objectByEvaluatingJavaScript:@"didMoveMouse()"] boolValue]);
+}
+
 } // namespace TestWebKitAPI
 
 #endif // PLATFORM(MAC)
