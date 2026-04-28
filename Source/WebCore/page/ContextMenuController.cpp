@@ -1204,7 +1204,8 @@ void ContextMenuController::populate()
 #endif
 #if PLATFORM(MAC) && ENABLE(VIDEO_PRESENTATION_MODE)
             appendItem(TogglePictureInPicture, m_contextMenu.get());
-            appendItem(ToggleVideoViewer, m_contextMenu.get());
+            if (frame->page() && frame->page()->settings().inWindowFullscreenEnabled())
+                appendItem(ToggleVideoViewer, m_contextMenu.get());
 #endif
             if (m_context.hitTestResult().isDownloadableMedia() && loader->client().canHandleRequest(ResourceRequest(WTF::move(mediaURL)))) {
                 appendItem(*separatorItem(), m_contextMenu.get());

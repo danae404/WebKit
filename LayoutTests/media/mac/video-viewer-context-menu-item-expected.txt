@@ -1,0 +1,11 @@
+Tests that the 'Enter Viewer' context menu item respects the InWindowFullscreenEnabled setting.
+
+On success, you will see a series of "PASS" messages, followed by "TEST COMPLETE".
+
+
+PASS contextMenuHasEnterViewerItem() is true
+PASS contextMenuHasEnterViewerItem() is false
+PASS successfullyParsed is true
+
+TEST COMPLETE
+

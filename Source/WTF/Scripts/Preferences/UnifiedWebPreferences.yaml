@@ -3750,11 +3750,11 @@ InWindowFullscreenEnabled:
   humanReadableDescription: "Enable In-Window Fullscreen"
   defaultValue:
     WebKitLegacy:
-      default: false
+      default: true
     WebKit:
-      default: false
+      default: true
     WebCore:
-      default: false
+      default: true
 
 InactiveMediaCaptureStreamRepromptIntervalInMinutes:
   type: double

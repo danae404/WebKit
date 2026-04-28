@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../../resources/js-test.js"></script>
+</head>
+<body>
+<video id="video" autoplay controls style="position:absolute; top:0; left:0; width:320px; height:240px"></video>
+<script>
+description("Tests that the 'Enter Viewer' context menu item respects the InWindowFullscreenEnabled setting.");
+
+function contextMenuHasEnterViewerItem() {
+    var video = document.getElementById("video");
+    var x = video.offsetLeft + video.offsetWidth / 2;
+    var y = video.offsetTop + video.offsetHeight / 2;
+    eventSender.mouseMoveTo(x, y);
+    return eventSender.contextClick().some(item => item.title === "Enter Viewer");
+}
+
+window.addEventListener("load", () => {
+    window.jsTestIsAsync = true;
+    if (!window.internals || !window.eventSender) {
+        debug("This test requires internals and eventSender.");
+        finishJSTest();
+        return;
+    }
+
+    var video = document.getElementById("video");
+
+    video.addEventListener("canplay", () => {
+        internals.settings.setInWindowFullscreenEnabled(true);
+        shouldBeTrue("contextMenuHasEnterViewerItem()");
+
+        internals.settings.setInWindowFullscreenEnabled(false);
+        shouldBeFalse("contextMenuHasEnterViewerItem()");
+
+        finishJSTest();
+    }, { once: true });
+
+    video.src = "../content/test.mp4";
+});
+</script>
+</body>
+</html>
